@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head> </head>
+  <body>
+    <div id="box">test</div>
+    <input id="inputData" onchange="debounce(myFunction,5000)" />
+    <div id="text"></div>
+  </body>
+  <script type="text/javascript">
+    let inputData = document.querySelector("#inputData").textContent;
+    let text = document.querySelector("#text");
+    function myFunction() {
+      let x = document.getElementById("inputData").value;
+      document.getElementById("text").innerHTML = x;
+    }
+    function debounce(fn, ms) {
+      let timeout;
+      function wrapper() {
+        clearTimeout(timeout);
+        timeout = setTimeout(() => func.apply(this, arguments), ms);
+      }
+      return wrapper;
+    }
+  </script>
+</html>
