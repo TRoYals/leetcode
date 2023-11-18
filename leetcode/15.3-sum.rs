@@ -5,49 +5,37 @@
  */
 
 // @lc code=start
+use std::collections::HashSet;
+
 impl Solution {
     pub fn three_sum(mut nums: Vec<i32>) -> Vec<Vec<i32>> {
+        let mut result = Vec::new();
         nums.sort();
-        let mut return_vec = Vec::new();
-        for i in 1..nums.len() - 1 {
-            let mut left_ptr = 0;
-            let mut right_ptr = nums.len() - 1;
-            let mut left_checker = 10000;
-            let mut right_checker = -10000;
-            let mut i_checker = -100000;
 
-            loop {
-                if (left_ptr == i || right_ptr == i) {
-                    break;
+        for i in 0..nums.len() {
+            if nums[i] > 0 {
+                break;
+            }
+            if i > 0 && nums[i] == nums[i - 1] {
+                continue;
+            }
+
+            let mut set = HashSet::new();
+            for j in i + 1..nums.len() {
+                if j > i + 2 && nums[j] == nums[j - 1] && nums[j - 1] == nums[j - 2] {
+                    continue;
                 }
-                let sum = nums[left_ptr] + nums[right_ptr] + nums[i];
-                if sum == 0 {
-                    if (right_checker == nums[right_ptr]) {
-                        right_checker = nums[right_ptr];
-                        right_ptr -= 1;
-                        continue;
-                    } else if (left_checker == nums[left_ptr]) {
-                        left_checker = nums[left_ptr];
-                        left_ptr += 1;
-                        continue;
-                    } else {
-                        return_vec.push(Vec::<i32>::from([
-                            nums[left_ptr],
-                            nums[i],
-                            nums[right_ptr],
-                        ]));
-                        right_checker = nums[right_ptr];
-                        left_checker = nums[left_ptr];
-                    }
-                }
-                if sum > 0 {
-                    right_ptr -= 1;
+                let c = 0 - (nums[i] + nums[j]);
+                if set.contains(&c) {
+                    result.push(vec![nums[i], nums[j], c]);
+                    set.remove(&c); // Remove to avoid duplicates
                 } else {
-                    left_ptr += 1;
+                    set.insert(nums[j]);
                 }
             }
         }
-        return_vec
+        result
     }
 }
+
 // @lc code=end
