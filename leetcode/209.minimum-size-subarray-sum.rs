@@ -10,7 +10,7 @@ impl Solution {
         let mut min_sub = i32::MAX as usize;
         for slow_ptr in 0..nums.len() {
             let mut sum = 0;
-            for fast_ptr in slow_ptr..nums.len() {
+            for fast_ptr in slow_ptr..(slow_ptr + min_sub).min(nums.len()) {
                 sum += nums[fast_ptr];
                 if (sum >= target && fast_ptr - slow_ptr < min_sub) {
                     min_sub = fast_ptr - slow_ptr + 1;
