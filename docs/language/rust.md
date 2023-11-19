@@ -30,3 +30,6 @@ but this is too hard to remember, so I suggest to use
 [samplecode](../../leetcode/242.valid-anagram.rs)
 
 this seems more clear. Also need to remember that `hash_map_b.get(&char)` returns a `Option<&i32>`, so need to use `Some(&count)` to get the value.
+
+also, for the `get`, the parameter is a reference, so need to use `&` to get the reference.
+as well as the `insert`, the parameter is a reference, so need to use `&` to get the reference.
