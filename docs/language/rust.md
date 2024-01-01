@@ -33,3 +33,22 @@ this seems more clear. Also need to remember that `hash_map_b.get(&char)` return
 
 also, for the `get`, the parameter is a reference, so need to use `&` to get the reference.
 as well as the `insert`, the parameter is a reference, so need to use `&` to get the reference.
+
+## linked list
+
+[LinkedList in std::collections - Rust](https://doc.rust-lang.org/std/collections/struct.LinkedList.html)
+
+```rust
+#[derive(PartialEq, Eq, Clone, Debug)]
+pub struct ListNode<T> {
+    pub val: T,
+    pub next: Option<Box<ListNode<T>>>,
+}
+
+impl<T> ListNode<T> {
+    #[inline]
+    fn new(val: T, node: Option<Box<ListNode<T>>>) -> Self {
+        ListNode { next: node, val }
+    }
+}
+```
