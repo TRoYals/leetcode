@@ -57,6 +57,10 @@
  * @return {boolean}
  */
 var isSymmetric = function (root) {
+  if (!root) {
+    return true;
+  }
+
   let isArrSyme = function (arr) {
     let start = 0;
     let end = arr.length - 1;
@@ -76,12 +80,16 @@ var isSymmetric = function (root) {
   let queue = [root];
   while (queue.length != 0) {
     let length = queue.length;
+    let level = [];
     for (var i = 0; i < length; i++) {
       let node = queue.shift();
-      queue.push(node ? node.left : null);
-      queue.push(node ? node.righ : null);
+      level.push(node);
+      if (node) {
+        queue.push(node.left);
+        queue.push(node.right);
+      }
     }
-    if (!isArrSyme(queue)) {
+    if (!isArrSyme(level)) {
       return false;
     }
   }
