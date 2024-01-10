@@ -64,11 +64,10 @@ var invertTree = function (root) {
   let stack = [root];
   while (stack.length > 0) {
     let curr = stack.pop();
-    stack.push(curr);
 
     let temp = curr.left;
     curr.left = curr.right;
-    curr.left = temp;
+    curr.right = temp;
 
     if (curr.left) {
       stack.push(curr.left);
