@@ -32,11 +32,8 @@
  *
  * Example 3:
  *
- *
  * Input: root = []
  * Output: []
- *
- *
  *
  * Constraints:
  *
@@ -64,11 +61,9 @@ var invertTree = function (root) {
   let stack = [root];
   while (stack.length > 0) {
     let curr = stack.pop();
-
     let temp = curr.left;
     curr.left = curr.right;
     curr.right = temp;
-
     if (curr.left) {
       stack.push(curr.left);
     }
