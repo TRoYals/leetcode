@@ -66,9 +66,51 @@
  * @param {TreeNode} root
  * @return {boolean}
  */
+// // 整个思路错了
+// var isValidBST = function (root) {
+//   let isValid = function (root) {
+//     let isValidLeft = true;
+//     let isValidRight = true;
+//     if (root.left == null && root.right == null) return true;
+//     if (root.left) {
+//       if (root.left.val < root.val) {
+//         if (root.left.right == null || root.left.right.val < root.val) {
+//           isValidLeft = isValid(root.left);
+//         } else return false;
+//       } else return false;
+//     }
+//     if (root.right) {
+//       if (root.right.val > root.val) {
+//         if (root.right.left == null || root.right.left.val > root.val) {
+//           isValidRight = isValid(root.right);
+//         } else return false;
+//       } else return false;
+//     }
+//     return isValidLeft && isValidRight;
+//   };
+//   return isValid(root);
+// };
+
 var isValidBST = function (root) {
-  let isValid = function (root) {
-    if (root == null) return;
+  let isValid = function (root, lower, upper) {
+    if (root == null) return true;
+    let isValidLeft = true;
+    let isValidRight = true;
+    let temp = 0;
+
+    if (root.val < upper) {
+      temp = root.val;
+      isValidLeft = isValid(root.left, lower, temp);
+    } else return false;
+
+    if (root.val > lower) {
+      temp = root.val;
+      isValidRight = isValid(root.right, temp, upper);
+    } else return false;
+
+    return isValidLeft && isValidRight;
   };
+  return isValid(root, (-2) ** 33, 2 ** 33);
 };
+
 // @lc code=end
