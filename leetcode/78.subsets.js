@@ -1,0 +1,70 @@
+/*
+ * @lc app=leetcode id=78 lang=javascript
+ *
+ * [78] Subsets
+ *
+ * https://leetcode.com/problems/subsets/description/
+ *
+ * algorithms
+ * Medium (76.89%)
+ * Likes:    16436
+ * Dislikes: 253
+ * Total Accepted:    1.7M
+ * Total Submissions: 2.2M
+ * Testcase Example:  '[1,2,3]'
+ *
+ * Given an integer array nums of unique elements, return all possible subsets
+ * (the power set).
+ *
+ * The solution set must not contain duplicate subsets. Return the solution in
+ * any order.
+ *
+ *
+ * Example 1:
+ *
+ *
+ * Input: nums = [1,2,3]
+ * Output: [[],[1],[2],[1,2],[3],[1,3],[2,3],[1,2,3]]
+ *
+ *
+ * Example 2:
+ *
+ *
+ * Input: nums = [0]
+ * Output: [[],[0]]
+ *
+ *
+ *
+ * Constraints:
+ *
+ *
+ * 1 <= nums.length <= 10
+ * -10 <= nums[i] <= 10
+ * All the numbers of nums are unique.
+ *
+ *
+ */
+
+// @lc code=start
+/**
+ * @param {number[]} nums
+ * @return {number[][]}
+ */
+var subsets = function (nums) {
+  let results = [];
+  let subsetsImpl = function (index, temp) {
+    if (index >= nums.length) {
+      return;
+    }
+    for (let i = index; i < nums.length; i++) {
+      temp.push(nums[i]);
+      results.push([...temp]);
+      subsetsImpl(i + 1, temp);
+      temp.pop();
+    }
+  };
+  subsetsImpl(0, []);
+  results.push([]);
+  return results;
+};
+// @lc code=end
