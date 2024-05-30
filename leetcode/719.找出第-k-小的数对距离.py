@@ -62,27 +62,20 @@
 
 # @lc code=start
 import bisect
+import heapq
 
 
 class Solution:
     def smallestDistancePair(self, nums: List[int], k: int) -> int:
-        nums.sort()
-
-        def count_smaller(arr, dis):
-            return len(arr) - bisect.bisect_left(arr, arr[-1] - dis, 0, len(arr))
-
-        def possible(dis):
-            count = 0
-            for i in range(1, len(nums)):
-                count += count_smaller(nums[0 : i + 1], dis)
-                print(count)
-                if count >= k:
-                    return False
-
-            return True
-
-        print(count_smaller([1, 1], 0))
-        print(possible(5))
+        # heap = []
+        # heapq.heapify(heap)
+        # for i in range(len(nums) - 1):
+        #     for j in range(i + 1, len(nums)):
+        #         heapq.heappush(heap, abs(nums[i] - nums[j]))
+        # for _ in range(k):
+        #     curr = heapq.heappop(heap)
+        # return curr
+        
 
 
 # @lc code=end
