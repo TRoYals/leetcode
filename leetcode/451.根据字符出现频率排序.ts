@@ -60,11 +60,11 @@
 // @lc code=start
 function frequencySort(s: string) {
   let dir = {};
-  for (let i of s) {
-    if (dir[i]) {
-      dir[i] += 1;
+  for (let i = 0; i < s.length; i++) {
+    if (s[i] in dir) {
+      dir[s[i]] += 1;
     } else {
-      dir[i] = 1;
+      dir[s[i]] = 1;
     }
   }
   let orderList = [];
@@ -73,8 +73,10 @@ function frequencySort(s: string) {
   }
   orderList.sort((a, b) => b[1] - a[1]);
   let returnString = "";
-  for (let i of orderList) {
-    returnString += i[0].repeat(i[1]);
+  for (let i = 0; i < orderList.length; i++) {
+    for (let k = 0; k < orderList[i][1]; k++) {
+      returnString += orderList[i][0];
+    }
   }
   return returnString;
 }

@@ -70,39 +70,35 @@ function splitListToParts(
   head: ListNode | null,
   k: number
 ): Array<ListNode | null> {
-  let count = linkLength(head);
   let returnArr = [];
-  let remain = Math.floor(count / k);
-  let sub = count % k;
-  for (let i = 0; i < sub; i++) {
-    returnArr.push(head);
-    let numberPer = remain + 1;
-    for (let j = 0; j < numberPer; j++) {
+  const lengthLinkList = function (head): number {
+    let length = 0;
+    while (head) {
+      length++;
       head = head.next;
+    }
+    return length;
+  };
+  let lengthList = lengthLinkList(head);
+  let res = lengthList % k;
+  let baseLength = Math.floor(lengthList / k);
+  for (let i = 0; i < k; i++) {
+    let currLength = baseLength;
+    if (i < res) {
+      currLength++;
     }
     let temp = head;
-    head.next = null;
-    head = temp;
-  }
-  for (let i = 0; i < k - sub; i++) {
-    returnArr.push(head);
-    let numberPer = remain;
-    for (let j = 0; j < numberPer; j++) {
+    let curr = temp;
+    for (let j = 0; j < currLength; j++) {
       head = head.next;
     }
-    let temp = head ? head.next : null;
-    if (head) head.next = null;
-    head = temp;
+    for (let j = 0; j < currLength - 1; j++) {
+      curr = curr.next;
+    }
+
+    if (curr) curr.next = null;
+    returnArr.push(temp);
   }
   return returnArr;
-}
-
-function linkLength(head) {
-  let count = 0;
-  while (head) {
-    head = head.next;
-    count += 1;
-  }
-  return count;
 }
 // @lc code=end
