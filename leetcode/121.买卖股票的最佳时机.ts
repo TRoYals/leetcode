@@ -51,7 +51,22 @@
 
 // @lc code=start
 function maxProfit(prices: number[]): number {
-    
+   let start = 0;
+   let end= 1;
+   let currMax = 0;
+   while(end<prices.length){
+    if(prices[end]-prices[start]>currMax){
+        currMax = prices[end]-prices[start];
+        end+=1;
+    }else if(prices[end]-prices[start]<0){
+        start = end;
+        end+=1;
+    }else{
+        end+=1;
+    }
+   }
+   return currMax;
+
 };
 // @lc code=end
 

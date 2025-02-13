@@ -53,23 +53,22 @@
  *
  */
 
+let testStr = "abba"
+console.log(lengthOfLongestSubstring(testStr))
+
 // @lc code=start
 function lengthOfLongestSubstring(s: string): number {
-  let set = new Set();
-  let l = 0;
-  let maxLength = 0;
-  for (let r = 0; r < s.length; r++) {
-    if (set.has(s[r])) {
-      while (s[l] != s[r]) {
-        set.delete(s[l]);
-        l++;
-      }
-      l++;
-    } else {
-      set.add(s[r]);
-      maxLength = Math.max(maxLength, r - l + 1);
+    let map = new Map<string, number>();
+    let left = 0;
+    let max  = 0;
+    for(let right= 0;right<s.length;right++){
+      if (map.has(s[right])){
+          left = Math.max(map.get(s[right])+1,left)
+        }
+        map.set(s[right],right);
+        max = Math.max(right-left+1,max);
+     
     }
-  }
-  return maxLength;
+    return max;
 }
 // @lc code=end

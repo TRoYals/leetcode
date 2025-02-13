@@ -51,9 +51,17 @@
  * 
  */
 
+let n = 12412412;
+console.log(thousandSeparator(n));
 // @lc code=start
 function thousandSeparator(n: number): string {
-
+    let stack = [];
+    let nString = n.toString();
+    for(let i=nString.length;i>0;i=i-3){
+        let curNum = nString.slice(i-3>0?i-3:0,i);
+        stack.unshift(curNum);
+    }
+    return stack.join(".")
 };
 // @lc code=end
 

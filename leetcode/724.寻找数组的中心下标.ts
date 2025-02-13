@@ -70,7 +70,18 @@
 
 // @lc code=start
 function pivotIndex(nums: number[]): number {
-    
+   let preSum = Array.from({length:nums.length+2},()=>0);
+   for(let i=1;i<preSum.length;i++){
+    preSum[i]=preSum[i-1]+nums[i-1]
+   }
+   preSum[nums.length+1] = preSum[nums.length]
+   let totalSum = preSum[nums.length]
+   for(let j =1;j<preSum.length-1;j++){
+    if(preSum[j-1]==totalSum-preSum[j]){
+        return j-1
+    }
+   }
+   return -1
 };
 // @lc code=end
 

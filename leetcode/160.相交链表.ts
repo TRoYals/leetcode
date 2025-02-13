@@ -118,7 +118,16 @@
  */
 
 function getIntersectionNode(headA: ListNode | null, headB: ListNode | null): ListNode | null {
-
+    let pA = headA;
+    let pB = headB;
+    while(pA!==pB){
+        if(pA.next===null && pB.next===null){
+            return null;
+        }
+        pA = pA.next===null?headB:pA.next;
+        pB = pB.next===null?headA:pB.next;
+    }
+    return pA;
 };
 // @lc code=end
 

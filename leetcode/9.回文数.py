@@ -63,5 +63,11 @@
 # @lc code=start
 class Solution:
     def isPalindrome(self, x: int) -> bool:
+        str_x = str(x)
+        num_length = len(str_x)
+        for i in range(num_length//2):
+            if (str_x[i] != str_x[num_length-i-1]):
+                return False
+        return True
 # @lc code=end
 

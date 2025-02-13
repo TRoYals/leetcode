@@ -60,34 +60,33 @@
 
 // @lc code=start
 function numIslands(grid: string[][]): number {
-  function dfs(x, y) {
-    if (x < 0 || x >= grid.length) {
-      return;
-    }
-    if (y < 0 || y >= grid[0].length) {
-      return;
-    }
-    if (grid[x][y] == "0") {
-      return;
-    }
-    if (grid[x][y] == "1") {
-      grid[x][y] = "0";
-    }
-    dfs(x - 1, y);
-    dfs(x + 1, y);
-    dfs(x, y + 1);
-    dfs(x, y - 1);
-    return;
-  }
-  let count = 0;
-  for (let i = 0; i < grid.length; i++) {
-    for (let j = 0; j < grid[0].length; j++) {
-      if (grid[i][j] == "1") {
-        dfs(i, j);
-        count += 1;
+   let view = Array.from({length:grid.length},()=> Array.from({length:grid[0].length},()=>0));
+   let dfs = (x,y)=>{
+      if(x<0||y<0||x>=grid.length||y>=grid[0].length){
+        return;
       }
+      if(view[x][y]===1){
+        return;
+      }
+      if(grid[x][y]==="0"){
+        return;
+      }
+      grid[x][y]="0";
+      dfs(x-1,y);
+      dfs(x+1,y);
+      dfs(x,y+1);
+      dfs(x,y-1);
+      return;
+   }
+   let count = 0;
+   for (let i = 0;i<grid.length;i++){
+    for(let j = 0;j<grid[0].length;j++){
+        if(grid[i][j]==="1"){
+            count+=1;
+            dfs(i,j);
+        }
     }
-  }
-  return count;
+   }
+   return count;
 }
 // @lc code=end
